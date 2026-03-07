@@ -1,0 +1,15 @@
+{
+  "2026-03-07T14:34:46.435627": {
+    "repos": {
+      "DavidGBrett": 0,
+      "Flow.Launcher.Plugin.AppAudioManager": 340,
+      "Flow.Launcher.Plugin.QueryGroups": 245,
+      "Flow.Launcher.Plugin.TimeIn": 90,
+      "Flow.Launcher.Plugin.VirtualDesktops": 186,
+      "Flow.Launcher.PluginsManifest": 0,
+      "flow-launcher.github.io": 0,
+      "vivaldi-workspace-desktop-mover": 2
+    },
+    "total": 863
+  }
+}
