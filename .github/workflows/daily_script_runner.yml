@@ -1,0 +1,45 @@
+name: Daily Script Runner
+
+permissions:
+  contents: write
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # Runs every day at midnight
+  workflow_dispatch:
+
+jobs:
+  run-scripts:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install .
+
+      - name: Run calculate_downloads.py
+        run: |
+          python scripts/calculate_downloads.py
+
+      - name: Run generate_total_downloads_chart.py
+        run: |
+          python scripts/generate_total_downloads_chart.py
+
+      - name: Commit changes
+        run: |
+          git config --local user.email 'github-actions[bot]@users.noreply.github.com'
+          git config --local user.name 'github-actions[bot]'
+          git add stats/ charts/
+          git commit -m 'Update stats and charts' || echo 'No changes to commit'
+
+      - name: Push changes
+        run: |
+          git push origin main
