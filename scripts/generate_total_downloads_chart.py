@@ -48,16 +48,67 @@ def make_chart(points: list[DataPoint], output_path: str = "charts/downloads.png
 
     dates, totals = zip(*points)
 
-    plt.figure(figsize=(8, 4))
-
-    # datetime values are auto spaced
-    plt.plot(dates, totals, linestyle="solid", marker="o")
-    plt.title("Downloads Across My Repositories")
-    plt.ylabel("Downloads")
-    plt.xlabel("Date")
-
+    # create fig
+    fig = plt.figure(figsize=(8, 4))
     # get axes
     ax = plt.gca()
+
+    fig.patch.set_alpha(0)  # Transparent figure background
+    ax.set_facecolor('none')  # Transparent axes background
+
+    # Plot your data with professional styling
+    line = ax.plot(dates, totals, 
+            linestyle="solid", 
+            marker="o",
+            color='#4ECDC4',  # Nice turquoise that pops on dark
+            linewidth=2.5,
+            markersize=6,
+            markeredgewidth=1.5,
+            markeredgecolor='white',  # White border makes markers pop
+            markerfacecolor='#4ECDC4',
+            alpha=0.9)
+
+    # Style the title
+    ax.set_title("Downloads Across My Repositories", 
+                color='white', 
+                fontsize=14, 
+                fontweight='bold', 
+                pad=20)
+
+    # Style the labels
+    ax.set_ylabel("Downloads", 
+                color='#CCCCCC', 
+                fontsize=12, 
+                fontweight='semibold')
+    ax.set_xlabel("Date", 
+                color='#CCCCCC', 
+                fontsize=12, 
+                fontweight='semibold')
+
+    # Style the axes
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_color('#666666')
+    ax.spines['left'].set_color('#666666')
+
+    # Style the ticks
+    ax.tick_params(axis='both', 
+                colors='#CCCCCC', 
+                labelsize=10)
+
+    # Add a light grid
+    ax.grid(True, 
+            linestyle='--', 
+            alpha=0.3, 
+            color='#666666')
+
+    # Optional: Add some fill below the line for visual interest
+    ax.fill_between(dates, totals, 
+                    alpha=0.2, 
+                    color='#4ECDC4')
+
+    # start y axis slighly before first total
+    ax.set_ylim(bottom=min(totals) * 0.95, top=max(totals)*1.01)
     
     # place exactly 5 ticks evenly from first to last date to guarantee endpoints
     if len(dates) > 5:
