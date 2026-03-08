@@ -48,16 +48,61 @@ def make_chart(points: list[DataPoint], output_path: str = "charts/downloads.png
 
     dates, totals = zip(*points)
 
-    plt.figure(figsize=(8, 4))
-
-    # datetime values are auto spaced
-    plt.plot(dates, totals, linestyle="solid", marker="o")
-    plt.title("Downloads Across My Repositories")
-    plt.ylabel("Downloads")
-    plt.xlabel("Date")
-
+    # create fig
+    fig = plt.figure(figsize=(8, 4))
     # get axes
     ax = plt.gca()
+
+    fig.patch.set_alpha(0)  # Transparent figure background
+    ax.set_facecolor('none')  # Transparent axes background
+
+    line = ax.plot(dates, totals, 
+            linestyle="solid", 
+            marker="o",
+            color='#4ECDC4',  
+            linewidth=2.5,
+            markersize=6,
+            markeredgewidth=1.5,
+            markeredgecolor='white', 
+            markerfacecolor='#4ECDC4',
+            alpha=0.9)
+
+    ax.set_title("Downloads Across My Repositories", 
+                color='white', 
+                fontsize=14, 
+                fontweight='bold', 
+                pad=20)
+
+    ax.set_ylabel("Downloads", 
+                color='#CCCCCC', 
+                fontsize=12, 
+                fontweight='semibold')
+    ax.set_xlabel("Date", 
+                color='#CCCCCC', 
+                fontsize=12, 
+                fontweight='semibold')
+
+    ax.spines['top'].set_visible(False)
+    ax.spines['right'].set_visible(False)
+    ax.spines['bottom'].set_color('#666666')
+    ax.spines['left'].set_color('#666666')
+
+    ax.tick_params(axis='both', 
+                colors='#CCCCCC', 
+                labelsize=10)
+
+    ax.grid(True, 
+            linestyle='--', 
+            alpha=0.3, 
+            color='#666666')
+
+    # fill from line to x axis
+    ax.fill_between(dates, totals, 
+                    alpha=0.2, 
+                    color='#4ECDC4')
+
+    # make y axis start and end around the range of the totals
+    ax.set_ylim(bottom=min(totals) * 0.95, top=max(totals)*1.01)
     
     # place exactly 5 ticks evenly from first to last date to guarantee endpoints
     if len(dates) > 5:
