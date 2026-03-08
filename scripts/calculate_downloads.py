@@ -65,9 +65,7 @@ def update_download_stats_file(repos_to_downloads:dict[str,int], total_profile_d
         json.dump(data, f, indent=2, sort_keys=True)    
 
 
-
-
-if __name__ == "__main__":
+def run():
     repo_names = get_public_repos_names()
 
     total_profile_downloads = 0
@@ -84,3 +82,6 @@ if __name__ == "__main__":
     print(total_profile_downloads)
 
     update_download_stats_file(repos_to_downloads, total_profile_downloads)
+
+if __name__ == "__main__":
+    run()
