@@ -15,23 +15,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+
       - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.13'
+        run: uv python install # Installs the Python version specified project
 
       - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install .
+        run: uv sync # Installs all core dependencies from pyproject.toml and uv.lock
 
       - name: Run calculate_downloads.py
         run: |
-          python scripts/calculate_downloads.py
+          uv run scripts/calculate_downloads.py
 
       - name: Run generate_total_downloads_chart.py
         run: |
-          python scripts/generate_total_downloads_chart.py
+          uv run scripts/generate_total_downloads_chart.py
 
       - name: Commit changes
         run: |
