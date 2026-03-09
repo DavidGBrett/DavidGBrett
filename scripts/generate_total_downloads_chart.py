@@ -4,6 +4,7 @@ import os
 
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
+import matplotlib.patheffects as path_effects
 
 from typing import NamedTuple
 
@@ -66,12 +67,14 @@ def make_chart(points: list[DataPoint], output_path: str = "charts/downloads.png
             markeredgecolor='white', 
             markerfacecolor='#4ECDC4',
             alpha=0.9)
-
+    
     ax.set_title("Downloads Across My Repositories", 
                 color='white', 
                 fontsize=14, 
-                fontweight='bold', 
-                pad=20)
+                fontweight='semibold', 
+                pad=20,
+                path_effects=[path_effects.Stroke(linewidth=2, foreground='black'),
+                         path_effects.Normal()])
 
     ax.set_ylabel("Downloads", 
                 color='#CCCCCC', 
