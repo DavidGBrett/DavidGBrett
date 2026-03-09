@@ -75,6 +75,12 @@ def make_chart(points: list[DataPoint], output_path: str = "charts/downloads.png
                 pad=20,
                 path_effects=[path_effects.Stroke(linewidth=2, foreground='black'),
                          path_effects.Normal()])
+    
+    plt.suptitle(f'Latest Total: {totals[-1]}',
+                y = 0.8,
+                x = 0.52,
+                fontsize=10, 
+                color='#CCCCCC')
 
     ax.set_ylabel("Downloads", 
                 color='#CCCCCC', 
@@ -83,6 +89,7 @@ def make_chart(points: list[DataPoint], output_path: str = "charts/downloads.png
     ax.set_xlabel("Date", 
                 color='#CCCCCC', 
                 fontsize=12, 
+                x = 0.48,
                 fontweight='semibold')
 
     ax.spines['top'].set_visible(False)
