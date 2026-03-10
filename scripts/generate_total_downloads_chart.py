@@ -69,17 +69,17 @@ def make_chart(points: list[DataPoint], output_path: str = "charts/downloads.png
             alpha=0.9)
     
     ax.set_title("Downloads Across My Repositories", 
-                color='white', 
+                color="#9BD1CE", 
                 fontsize=14, 
                 fontweight='semibold', 
                 pad=20,
-                path_effects=[path_effects.Stroke(linewidth=2, foreground='black'),
-                         path_effects.Normal()])
+                )
     
     plt.suptitle(f'Latest Total: {totals[-1]}',
                 y = 0.8,
                 x = 0.52,
-                fontsize=10, 
+                fontsize=10,
+                fontweight='semibold',
                 color='#CCCCCC')
 
     ax.set_ylabel("Downloads", 
