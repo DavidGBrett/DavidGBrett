@@ -78,7 +78,8 @@ def make_chart(points: list[DataPoint], output_path: str = "charts/downloads.png
     plt.suptitle(f'Latest Total: {totals[-1]}',
                 y = 0.8,
                 x = 0.52,
-                fontsize=10, 
+                fontsize=10,
+                fontweight='semibold',
                 color='#CCCCCC')
 
     ax.set_ylabel("Downloads", 
