@@ -1,3 +1,3 @@
 Hi, I'm David
 
-![Downloads chart](gen/charts/downloads.png)
+![Total Downloads Chart](gen/charts/total_downloads_chart.png)
