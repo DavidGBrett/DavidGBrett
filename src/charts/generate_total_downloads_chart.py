@@ -42,7 +42,7 @@ def filter_last_n_days(points: list[DataPoint], days: int = config.DOWNLOADS_DAY
     return [DataPoint(dt, total) for dt, total in points if dt >= cutoff]
 
 
-def make_total_downloads_chart(points: list[DataPoint]):
+def generate_total_downloads_chart(points: list[DataPoint]):
     # ensure directory exists
     os.makedirs(config.CHARTS_DIR, exist_ok=True)
 
@@ -154,7 +154,7 @@ def run():
     data = load_stats()
     points = extract_total_downloads_datapoints(data)
     recent = filter_last_n_days(points)
-    make_total_downloads_chart(recent)
+    generate_total_downloads_chart(recent)
 
 if __name__ == "__main__":
     run()
