@@ -8,11 +8,17 @@ import matplotlib.patheffects as path_effects
 
 from typing import NamedTuple
 
+try:
+    from src import config
+except ImportError:
+    import config
+
 class DataPoint(NamedTuple):
     date: datetime
     downloads: int
 
-def load_stats(path: str = "gen/stats/repo_downloads.json"):
+def load_stats():
+    path = os.path.join(config.STATS_DIR, config.DOWNLOADS_STATS_FILENAME)
     if not os.path.exists(path):
         raise FileNotFoundError(f"Stats file not found: {path}")
     with open(path, "r") as f:
@@ -30,14 +36,16 @@ def extract_total_downloads_datapoints(stats_data) -> list[DataPoint]:
     return points
 
 
-def filter_last_n_days(points: list[DataPoint], days: int = 30) -> list[DataPoint]:
+def filter_last_n_days(points: list[DataPoint], days: int = config.DOWNLOADS_DAYS_FILTER) -> list[DataPoint]:
     cutoff = datetime.now() - timedelta(days=days)
     return [DataPoint(dt, total) for dt, total in points if dt >= cutoff]
 
 
-def make_chart(points: list[DataPoint], output_path: str = "gen/charts/downloads.png"):
+def make_chart(points: list[DataPoint]):
     # ensure directory exists
-    os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    os.makedirs(config.CHARTS_DIR, exist_ok=True)
+
+    output_path = os.path.join(config.CHARTS_DIR, config.DOWNLOADS_CHART_FILENAME)
 
     if not points:
         # create empty placeholder image
@@ -143,7 +151,7 @@ def make_chart(points: list[DataPoint], output_path: str = "gen/charts/downloads
 def run():
     data = load_stats()
     points = extract_total_downloads_datapoints(data)
-    recent = filter_last_n_days(points, days=30)
+    recent = filter_last_n_days(points)
     make_chart(recent)
 
 if __name__ == "__main__":
