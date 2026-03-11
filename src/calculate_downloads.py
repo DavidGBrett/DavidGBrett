@@ -4,9 +4,9 @@ import os
 import requests
 
 try:
-    from src import config
+    from src.constants import config
 except ImportError:
-    import config
+    from constants import config
 
 def get_public_repos_names():
     repo_names = []
