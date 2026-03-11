@@ -26,11 +26,11 @@ jobs:
 
       - name: Run calculate_downloads.py
         run: |
-          uv run scripts/calculate_downloads.py
+          uv run src/calculate_downloads.py
 
       - name: Run generate_total_downloads_chart.py
         run: |
-          uv run scripts/generate_total_downloads_chart.py
+          uv run src/generate_total_downloads_chart.py
 
       - name: Commit changes
         run: |
