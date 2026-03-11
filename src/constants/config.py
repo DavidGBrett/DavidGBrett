@@ -11,7 +11,7 @@ CHARTS_DIR = "gen/charts"
 
 # File Names
 DOWNLOADS_STATS_FILENAME = "repo_downloads.json"
-DOWNLOADS_CHART_FILENAME = "downloads.png"
+TOTAL_DOWNLOADS_CHART_FILENAME = "total_downloads_chart.png"
 
 # Other
 DOWNLOADS_DAYS_FILTER = 30

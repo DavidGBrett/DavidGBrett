@@ -46,7 +46,7 @@ def make_total_downloads_chart(points: list[DataPoint]):
     # ensure directory exists
     os.makedirs(config.CHARTS_DIR, exist_ok=True)
 
-    output_path = os.path.join(config.CHARTS_DIR, config.DOWNLOADS_CHART_FILENAME)
+    output_path = os.path.join(config.CHARTS_DIR, config.TOTAL_DOWNLOADS_CHART_FILENAME)
 
     if not points:
         # create empty placeholder image
