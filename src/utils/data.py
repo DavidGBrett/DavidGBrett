@@ -2,7 +2,7 @@
 
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timedelta
 from typing import NamedTuple
 
 try:
@@ -17,6 +17,9 @@ class DownloadsDataPoint(NamedTuple):
     date: datetime
     downloads: int
 
+def filter_last_n_days(points: list[DownloadsDataPoint], days: int = config.DOWNLOADS_DAYS_FILTER) -> list[DownloadsDataPoint]:
+    cutoff = datetime.now() - timedelta(days=days)
+    return [DownloadsDataPoint(dt, total) for dt, total in points if dt >= cutoff]
 
 def load_stats() -> dict:
     """Load stats data from the configured stats file."""

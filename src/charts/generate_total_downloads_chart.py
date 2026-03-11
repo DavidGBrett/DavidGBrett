@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime
 import os
 
 import matplotlib.pyplot as plt
@@ -6,12 +6,12 @@ import matplotlib.dates as mdates
 
 try:
     from src.constants import config, theme
-    from src.utils.data import load_stats, DownloadsDataPoint
+    from src.utils.data import load_stats, filter_last_n_days, DownloadsDataPoint
 except ImportError:
     import sys
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
     from constants import config, theme
-    from utils.data import load_stats, DownloadsDataPoint
+    from utils.data import load_stats, filter_last_n_days, DownloadsDataPoint
 
 def extract_total_downloads_datapoints(stats_data) -> list[DownloadsDataPoint]:
     # convert timestamps to datetime and extract totals
@@ -22,11 +22,6 @@ def extract_total_downloads_datapoints(stats_data) -> list[DownloadsDataPoint]:
         points.append(DownloadsDataPoint(dt, total))
     points.sort(key=lambda x: x[0])
     return points
-
-
-def filter_last_n_days(points: list[DownloadsDataPoint], days: int = config.DOWNLOADS_DAYS_FILTER) -> list[DownloadsDataPoint]:
-    cutoff = datetime.now() - timedelta(days=days)
-    return [DownloadsDataPoint(dt, total) for dt, total in points if dt >= cutoff]
 
 
 def generate_total_downloads_chart(points: list[DownloadsDataPoint]):
