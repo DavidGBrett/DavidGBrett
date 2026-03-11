@@ -37,7 +37,7 @@ def get_sum_of_release_downloads(repo_name:str):
     return total_downloads
 
 def update_download_stats_file(repos_to_downloads:dict[str,int], total_profile_downloads:int):
-    stats_dir = "stats/"
+    stats_dir = "gen/stats/"
     os.makedirs(stats_dir, exist_ok=True)
     
     filepath = os.path.join(stats_dir, "repo_downloads.json")
