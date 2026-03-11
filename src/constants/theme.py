@@ -44,3 +44,6 @@ class Axis:
     y_max_margin: ClassVar[float] = 1.01
     tick_rotation: ClassVar[int] = 45
     date_format: ClassVar[str] = "%d %b"  # Day number and abbreviated month
+
+class Chart:
+    num_x_ticks: ClassVar[int] = 5

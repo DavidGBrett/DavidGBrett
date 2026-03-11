@@ -8,10 +8,11 @@ import matplotlib.dates as mdates
 from typing import NamedTuple
 
 try:
-    from src import config, theme
+    from src.constants import config, theme
 except ImportError:
-    import config
-    import theme
+    import sys
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
+    from constants import config, theme
 
 class DataPoint(NamedTuple):
     date: datetime
