@@ -12,7 +12,7 @@ class DataPoint(NamedTuple):
     date: datetime
     downloads: int
 
-def load_stats(path: str = "stats/repo_downloads.json"):
+def load_stats(path: str = "gen/stats/repo_downloads.json"):
     if not os.path.exists(path):
         raise FileNotFoundError(f"Stats file not found: {path}")
     with open(path, "r") as f:
@@ -35,7 +35,7 @@ def filter_last_n_days(points: list[DataPoint], days: int = 30) -> list[DataPoin
     return [DataPoint(dt, total) for dt, total in points if dt >= cutoff]
 
 
-def make_chart(points: list[DataPoint], output_path: str = "charts/downloads.png"):
+def make_chart(points: list[DataPoint], output_path: str = "gen/charts/downloads.png"):
     # ensure directory exists
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
 
