@@ -10,6 +10,8 @@ from typing import NamedTuple
 try:
     from src.constants import config, theme
 except ImportError:
+    import sys
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
     from constants import config, theme
 
 class DataPoint(NamedTuple):

@@ -30,7 +30,7 @@ jobs:
 
       - name: Run generate_total_downloads_chart.py
         run: |
-          uv run src/generate_total_downloads_chart.py
+          uv run src/charts/generate_total_downloads_chart.py
 
       - name: Commit changes
         run: |
