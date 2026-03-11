@@ -6,30 +6,30 @@ import matplotlib.dates as mdates
 
 try:
     from src.constants import config, theme
-    from src.utils.data import load_stats, DataPoint
+    from src.utils.data import load_stats, DownloadsDataPoint
 except ImportError:
     import sys
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
     from constants import config, theme
-    from utils.data import load_stats, DataPoint
+    from utils.data import load_stats, DownloadsDataPoint
 
-def extract_total_downloads_datapoints(stats_data) -> list[DataPoint]:
+def extract_total_downloads_datapoints(stats_data) -> list[DownloadsDataPoint]:
     # convert timestamps to datetime and extract totals
-    points:list[DataPoint] = []
+    points:list[DownloadsDataPoint] = []
     for ts, info in stats_data.items():
         dt = datetime.fromisoformat(ts)
         total = info.get("total", 0)
-        points.append(DataPoint(dt, total))
+        points.append(DownloadsDataPoint(dt, total))
     points.sort(key=lambda x: x[0])
     return points
 
 
-def filter_last_n_days(points: list[DataPoint], days: int = config.DOWNLOADS_DAYS_FILTER) -> list[DataPoint]:
+def filter_last_n_days(points: list[DownloadsDataPoint], days: int = config.DOWNLOADS_DAYS_FILTER) -> list[DownloadsDataPoint]:
     cutoff = datetime.now() - timedelta(days=days)
-    return [DataPoint(dt, total) for dt, total in points if dt >= cutoff]
+    return [DownloadsDataPoint(dt, total) for dt, total in points if dt >= cutoff]
 
 
-def generate_total_downloads_chart(points: list[DataPoint]):
+def generate_total_downloads_chart(points: list[DownloadsDataPoint]):
     # ensure directory exists
     os.makedirs(config.CHARTS_DIR, exist_ok=True)
 

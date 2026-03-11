@@ -13,7 +13,7 @@ except ImportError:
     from constants import config
 
 
-class DataPoint(NamedTuple):
+class DownloadsDataPoint(NamedTuple):
     date: datetime
     downloads: int
 
