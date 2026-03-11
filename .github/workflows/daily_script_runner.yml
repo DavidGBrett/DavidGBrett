@@ -24,9 +24,9 @@ jobs:
       - name: Install dependencies
         run: uv sync # Installs all core dependencies from pyproject.toml and uv.lock
 
-      - name: Run calculate_downloads.py
+      - name: Run update_repo_downloads_stats.py
         run: |
-          uv run src/calculate_downloads.py
+          uv run src/update_repo_downloads_stats.py
 
       - name: Run generate_total_downloads_chart.py
         run: |
