@@ -1,30 +1,17 @@
 from datetime import datetime, timedelta
-import json
 import os
 
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
 
-from typing import NamedTuple
-
 try:
     from src.constants import config, theme
+    from src.utils.data import load_stats, DataPoint
 except ImportError:
     import sys
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
     from constants import config, theme
-
-class DataPoint(NamedTuple):
-    date: datetime
-    downloads: int
-
-def load_stats():
-    path = os.path.join(config.STATS_DIR, config.DOWNLOADS_STATS_FILENAME)
-    if not os.path.exists(path):
-        raise FileNotFoundError(f"Stats file not found: {path}")
-    with open(path, "r") as f:
-        data = json.load(f)
-    return data
+    from utils.data import load_stats, DataPoint
 
 def extract_total_downloads_datapoints(stats_data) -> list[DataPoint]:
     # convert timestamps to datetime and extract totals
