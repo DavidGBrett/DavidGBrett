@@ -4,14 +4,14 @@ import os
 
 import matplotlib.pyplot as plt
 import matplotlib.dates as mdates
-import matplotlib.patheffects as path_effects
 
 from typing import NamedTuple
 
 try:
-    from src import config
+    from src import config, theme
 except ImportError:
     import config
+    import theme
 
 class DataPoint(NamedTuple):
     date: datetime
@@ -58,69 +58,70 @@ def make_chart(points: list[DataPoint]):
     dates, totals = zip(*points)
 
     # create fig
-    fig = plt.figure(figsize=(8, 4))
+    fig = plt.figure(figsize=theme.Figure.figsize)
     # get axes
     ax = plt.gca()
 
-    fig.patch.set_alpha(0)  # Transparent figure background
+    fig.patch.set_alpha(theme.Figure.background_alpha)  # Transparent figure background
     ax.set_facecolor('none')  # Transparent axes background
 
     line = ax.plot(dates, totals, 
-            linestyle="solid", 
+            linestyle=theme.Line.linestyle, 
             marker="o",
-            color='#4ECDC4',  
-            linewidth=2.5,
-            markersize=6,
-            markeredgewidth=1.5,
-            markeredgecolor='white', 
-            markerfacecolor='#4ECDC4',
-            alpha=0.9)
+            color=theme.Colors.primary,  
+            linewidth=theme.Line.linewidth,
+            markersize=theme.Marker.markersize,
+            markeredgewidth=theme.Marker.markeredgewidth,
+            markeredgecolor=theme.Colors.marker_edge, 
+            markerfacecolor=theme.Colors.primary,
+            alpha=theme.Line.alpha)
     
     ax.set_title("Downloads Across My Repositories", 
-                color="#9BD1CE", 
-                fontsize=14, 
-                fontweight='semibold', 
-                pad=20,
+                color=theme.Colors.title, 
+                fontsize=theme.Typography.title_fontsize, 
+                fontweight=theme.Typography.title_fontweight, 
+                pad=theme.Typography.title_pad,
                 )
     
     plt.suptitle(f'Latest Total: {totals[-1]}',
                 y = 0.8,
                 x = 0.52,
-                fontsize=10,
-                fontweight='semibold',
-                color='#CCCCCC')
+                fontsize=theme.Typography.subtitle_fontsize,
+                fontweight=theme.Typography.subtitle_fontweight,
+                color=theme.Colors.text)
 
     ax.set_ylabel("Downloads", 
-                color='#CCCCCC', 
-                fontsize=12, 
-                fontweight='semibold')
+                color=theme.Colors.text, 
+                fontsize=theme.Typography.label_fontsize, 
+                fontweight=theme.Typography.label_fontweight)
     ax.set_xlabel("Date", 
-                color='#CCCCCC', 
-                fontsize=12, 
+                color=theme.Colors.text, 
+                fontsize=theme.Typography.label_fontsize,
                 x = 0.48,
-                fontweight='semibold')
+                fontweight=theme.Typography.label_fontweight)
 
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.spines['bottom'].set_color('#666666')
-    ax.spines['left'].set_color('#666666')
+    ax.spines['bottom'].set_color(theme.Colors.structural)
+    ax.spines['left'].set_color(theme.Colors.structural)
 
     ax.tick_params(axis='both', 
-                colors='#CCCCCC', 
-                labelsize=10)
+                colors=theme.Colors.text, 
+                labelsize=theme.Typography.tick_fontsize)
 
     ax.grid(True, 
-            linestyle='--', 
-            alpha=0.3, 
-            color='#666666')
+            linestyle=theme.Grid.linestyle, 
+            alpha=theme.Grid.alpha, 
+            color=theme.Colors.structural)
 
     # fill from line to x axis
     ax.fill_between(dates, totals, 
-                    alpha=0.2, 
-                    color='#4ECDC4')
+                    alpha=theme.Fill.alpha, 
+                    color=theme.Colors.primary)
 
     # make y axis start and end around the range of the totals
-    ax.set_ylim(bottom=min(totals) * 0.95, top=max(totals)*1.01)
+    ax.set_ylim(bottom=min(totals) * theme.Axis.y_min_margin, 
+                top=max(totals) * theme.Axis.y_max_margin)
     
     # place exactly 5 ticks evenly from first to last date to guarantee endpoints
     if len(dates) > 5:
@@ -135,11 +136,11 @@ def make_chart(points: list[DataPoint]):
     ax.set_xticks(tick_dates)
 
     # show day number and abbreviated month on date labels
-    formatter = mdates.DateFormatter("%d %b")
+    formatter = mdates.DateFormatter(theme.Axis.date_format)
     ax.xaxis.set_major_formatter(formatter)
 
     # tilt date labels
-    ax.xaxis.set_tick_params(rotation=45)
+    ax.xaxis.set_tick_params(rotation=theme.Axis.tick_rotation)
 
     # Auto-adjusts subplot spacing to prevent overlapping labels/titles etc
     plt.tight_layout()
