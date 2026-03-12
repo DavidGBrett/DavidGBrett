@@ -83,6 +83,28 @@ def generate_top_repos_chart(repos: list[tuple[str, int]]):
         github_url = f"https://github.com/{config.GITHUB_USERNAME}/{repo_name}"
         bar.set_url(github_url)
 
+    # Add GitHub URLs to the x-axis labels
+    xticklabels = ax.get_xticklabels()
+    for label, repo_name in zip(xticklabels, repo_names):
+        github_url = f"https://github.com/{config.GITHUB_USERNAME}/{repo_name}"
+
+        # makes the stroke of the text clickable
+        label.set_url(github_url)
+        # also want a bounding box to be clickable
+        label.set_bbox(
+            dict(
+                url=github_url,
+                boxstyle='round,pad=0.5',
+
+                # cant directly set it to be invisible - basically have to trick it or it wont render this
+                # though it does seem to round this down to 0 opacity
+                facecolor='#00000001',
+                edgecolor='#00000001',
+                alpha=0.0000000000000000000000000001
+            )
+        )
+        
+
     # Add solid top line to each bar to match line chart style
     for bar, height in zip(bars, download_counts):
         ax.plot([bar.get_x(), bar.get_x() + bar.get_width()], [height, height],
