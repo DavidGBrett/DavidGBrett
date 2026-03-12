@@ -73,10 +73,15 @@ def generate_top_repos_chart(repos: list[tuple[str, int]]):
     fig.patch.set_alpha(theme.Figure.background_alpha)  # Transparent background
     ax.set_facecolor('none')
 
-    # Create bars with faded fill
+    # Create bars with faded fill and set URLs
     bars = ax.bar(repo_names, download_counts,
                    color=theme.Colors.primary,
                    alpha=theme.Fill.alpha)
+    
+    # Add GitHub URLs to each bar
+    for bar, repo_name in zip(bars, repo_names):
+        github_url = f"https://github.com/{config.GITHUB_USERNAME}/{repo_name}"
+        bar.set_url(github_url)
 
     # Add solid top line to each bar to match line chart style
     for bar, height in zip(bars, download_counts):
