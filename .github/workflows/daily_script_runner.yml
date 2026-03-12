@@ -32,6 +32,10 @@ jobs:
         run: |
           uv run src/charts/generate_total_downloads_chart.py
 
+      - name: Run generate_top_repos_chart.py
+        run: |
+          uv run src/charts/generate_top_repos_chart.py
+
       - name: Commit changes
         run: |
           git config --local user.email 'github-actions[bot]@users.noreply.github.com'
