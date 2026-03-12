@@ -125,7 +125,9 @@ def generate_total_downloads_chart(points: list[DownloadsDataPoint]):
     # Auto-adjusts subplot spacing to prevent overlapping labels/titles etc
     plt.tight_layout()
 
-    plt.savefig(output_path)
+    # Save as SVG
+    plt.savefig(output_path, format='svg', bbox_inches='tight',
+               facecolor='none', edgecolor='none')
     plt.close()
 
 
