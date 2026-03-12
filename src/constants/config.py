@@ -11,7 +11,7 @@ CHARTS_DIR = "gen/charts"
 
 # File Names
 DOWNLOADS_STATS_FILENAME = "repo_downloads.json"
-TOTAL_DOWNLOADS_CHART_FILENAME = "total_downloads_chart.png"
+TOTAL_DOWNLOADS_CHART_FILENAME = "total_downloads_chart.svg"
 TOP_REPOS_CHART_FILENAME = "top_repos_downloads_chart.svg"
 
 # Other

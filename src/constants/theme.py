@@ -42,7 +42,6 @@ class Grid:
 class Axis:
     y_min_margin: ClassVar[float] = 0.95
     y_max_margin: ClassVar[float] = 1.01
-    tick_rotation: ClassVar[int] = 45
     date_format: ClassVar[str] = "%d %b"  # Day number and abbreviated month
 
 class Chart:

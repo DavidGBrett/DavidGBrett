@@ -122,13 +122,12 @@ def generate_total_downloads_chart(points: list[DownloadsDataPoint]):
     formatter = mdates.DateFormatter(theme.Axis.date_format)
     ax.xaxis.set_major_formatter(formatter)
 
-    # tilt date labels
-    ax.xaxis.set_tick_params(rotation=theme.Axis.tick_rotation)
-
     # Auto-adjusts subplot spacing to prevent overlapping labels/titles etc
     plt.tight_layout()
 
-    plt.savefig(output_path)
+    # Save as SVG
+    plt.savefig(output_path, format='svg', bbox_inches='tight',
+               facecolor='none', edgecolor='none')
     plt.close()
 
 
