@@ -106,12 +106,12 @@ def generate_total_downloads_chart(points: list[DownloadsDataPoint]):
     ax.set_ylim(bottom=min(totals) * theme.Axis.y_min_margin, 
                 top=max(totals) * theme.Axis.y_max_margin)
     
-    # place exactly 5 ticks evenly from first to last date to guarantee endpoints
-    if len(dates) > 5:
-        num_ticks = 5
-        tick_dates = [dates[0] + (dates[-1] - dates[0]) * i / (num_ticks - 1) for i in range(num_ticks)]
-    # handle edge cases
-    elif len(dates) > 1:
+    # # place exactly 5 ticks evenly from first to last date to guarantee endpoints
+    # if len(dates) > 5:
+    #     num_ticks = 5
+    #     tick_dates = [dates[0] + (dates[-1] - dates[0]) * i / (num_ticks - 1) for i in range(num_ticks)]
+    # # handle edge cases
+    if len(dates) > 1:
         tick_dates = [dates[0],dates[-1]]    
     else:
         tick_dates = dates
