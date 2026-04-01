@@ -15,5 +15,5 @@ TOTAL_DOWNLOADS_CHART_FILENAME = "total_downloads_chart.svg"
 TOP_REPOS_CHART_FILENAME = "top_repos_downloads_chart.svg"
 
 # Other
-DOWNLOADS_DAYS_FILTER = 30
+DOWNLOADS_DAYS_FILTER = 14
 TOP_REPOS_COUNT = 3

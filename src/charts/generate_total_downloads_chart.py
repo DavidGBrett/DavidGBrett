@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 
 import matplotlib.pyplot as plt
@@ -7,11 +7,13 @@ import matplotlib.dates as mdates
 try:
     from src.constants import config, theme
     from src.utils.data import load_stats, filter_last_n_days, DownloadsDataPoint
+    from src.utils.time import round_to_nearest_date_at_midnight
 except ImportError:
     import sys
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
     from constants import config, theme
     from utils.data import load_stats, filter_last_n_days, DownloadsDataPoint
+    from utils.time import round_to_nearest_date_at_midnight
 
 def extract_total_downloads_datapoints(stats_data) -> list[DownloadsDataPoint]:
     # convert timestamps to datetime and extract totals
@@ -88,14 +90,22 @@ def generate_total_downloads_chart(points: list[DownloadsDataPoint]):
     ax.spines['bottom'].set_color(theme.Colors.structural)
     ax.spines['left'].set_color(theme.Colors.structural)
 
-    ax.tick_params(axis='both', 
-                colors=theme.Colors.text, 
-                labelsize=theme.Typography.tick_fontsize)
+    
+    # style the major and minor ticks for the x axis
+    ax.tick_params(axis='x', which='major', colors=theme.Colors.text, length=6, labelsize=theme.Typography.tick_fontsize)
+    ax.tick_params(axis='x', which='minor', colors=theme.Colors.text, length=3, width=1)
 
-    ax.grid(True, 
-            linestyle=theme.Grid.linestyle, 
-            alpha=theme.Grid.alpha, 
-            color=theme.Colors.structural)
+    # style y axis ticks
+    ax.tick_params(axis='y', colors=theme.Colors.text)
+
+    # grid lines for y axis on major ticks
+    ax.grid(True, which='major', axis='y', linestyle=theme.Grid.linestyle,
+            alpha=theme.Grid.alpha, color=theme.Colors.structural)
+
+    # grid lines for x axis on both major and minor ticks
+    ax.grid(True, which='both', axis='x', linestyle=theme.Grid.linestyle,
+            alpha=theme.Grid.alpha, color=theme.Colors.structural)
+    
 
     # fill from line to x axis
     ax.fill_between(dates, totals, 
@@ -106,21 +116,25 @@ def generate_total_downloads_chart(points: list[DownloadsDataPoint]):
     ax.set_ylim(bottom=min(totals) * theme.Axis.y_min_margin, 
                 top=max(totals) * theme.Axis.y_max_margin)
     
-    # # place exactly 5 ticks evenly from first to last date to guarantee endpoints
-    # if len(dates) > 5:
-    #     num_ticks = 5
-    #     tick_dates = [dates[0] + (dates[-1] - dates[0]) * i / (num_ticks - 1) for i in range(num_ticks)]
-    # # handle edge cases
     if len(dates) > 1:
-        tick_dates = [dates[0],dates[-1]]    
+        start_date:datetime = dates[0]
+        end_date:datetime = dates[-1]
+
+        # show major ticks at nearest date at midnight to first and last datapoint
+        start_edge = round_to_nearest_date_at_midnight(start_date)
+        end_edge = round_to_nearest_date_at_midnight(end_date)
+        ax.set_xticks([start_edge,end_edge]) # type: ignore
+
+        # show minor ticks for each day
+        ax.xaxis.set_minor_locator(mdates.DayLocator())
+
+    # ugly but passable for just one date edge case
     else:
-        tick_dates = dates
-    
-    ax.set_xticks(tick_dates)
+        ax.set_xticks(dates)
 
     # show day number and abbreviated month on date labels
     formatter = mdates.DateFormatter(theme.Axis.date_format)
-    ax.xaxis.set_major_formatter(formatter)
+    ax.xaxis.set_major_formatter(formatter)    
 
     # Auto-adjusts subplot spacing to prevent overlapping labels/titles etc
     plt.tight_layout()
