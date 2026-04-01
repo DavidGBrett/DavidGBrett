@@ -7,11 +7,13 @@ import matplotlib.dates as mdates
 try:
     from src.constants import config, theme
     from src.utils.data import load_stats, filter_last_n_days, DownloadsDataPoint
+    from src.utils.time import round_to_nearest_date_at_midnight
 except ImportError:
     import sys
     sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
     from constants import config, theme
     from utils.data import load_stats, filter_last_n_days, DownloadsDataPoint
+    from utils.time import round_to_nearest_date_at_midnight
 
 def extract_total_downloads_datapoints(stats_data) -> list[DownloadsDataPoint]:
     # convert timestamps to datetime and extract totals
@@ -119,8 +121,8 @@ def generate_total_downloads_chart(points: list[DownloadsDataPoint]):
         end_date:datetime = dates[-1]
 
         # show major ticks at nearest date at midnight to first and last datapoint
-        start_edge = (start_date+ timedelta(hours=12)).replace(hour=0, minute=0, second=0, microsecond=0)
-        end_edge = (end_date + timedelta(hours=12)).replace(hour=0, minute=0, second=0, microsecond=0)
+        start_edge = round_to_nearest_date_at_midnight(start_date)
+        end_edge = round_to_nearest_date_at_midnight(end_date)
         ax.set_xticks([start_edge,end_edge]) # type: ignore
 
         # show minor ticks for each day
