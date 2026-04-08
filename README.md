@@ -1,7 +1,7 @@
-Hi, I'm David.
+## Hi, I'm David.
 
-Recently I've been working on plugins for [Flow launcher](https://github.com/Flow-Launcher/Flow.Launcher).
-You can find them on their [website](https://www.flowlauncher.com/plugins/?search=DavidGBrett) or here on my github.
+Recently I've been working on plugins for <a href="https://github.com/Flow-Launcher/Flow.Launcher" style="color:#9BD1CE;text-decoration-color:#9BD1CE;">Flow launcher</a>.
+You can find them on their <a href="https://www.flowlauncher.com/plugins/?search=DavidGBrett" style="color:#9BD1CE;text-decoration-color:#9BD1CE;">website</a> or here on my github.
 
 ![Total Downloads Chart](gen/charts/total_downloads_chart.svg)
 
