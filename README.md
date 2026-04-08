@@ -6,3 +6,5 @@ You can find them on their [website](https://www.flowlauncher.com/plugins/?searc
 ![Total Downloads Chart](gen/charts/total_downloads_chart.svg)
 
 ![Top Repos Chart](gen/charts/top_repos_downloads_chart.svg)
+
+![Top Languages Chart](https://githubcard.com/DavidGBrett.svg?d=U-Bs9oG7)
