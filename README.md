@@ -1,9 +1,8 @@
 ## Hi, I'm David.
 
-<p style="display: flex; align-items: center; gap: 8px;">
-  <strong>Maintainer of <a href="https://github.com/Flow-Launcher/Flow.Launcher">Flow Launcher</a></strong>
-  <a href="https://github.com/Flow-Launcher/Flow.Launcher/releases"><img src="https://img.shields.io/github/downloads/Flow-Launcher/Flow.Launcher/total.svg" style="vertical-align: middle;"></a>
-</p>
+**Maintainer of [Flow Launcher](https://github.com/Flow-Launcher/Flow.Launcher)**
+<br>
+[![](https://img.shields.io/github/downloads/Flow-Launcher/Flow.Launcher/total.svg)](https://github.com/Flow-Launcher/Flow.Launcher/releases)
 
 I work on the core project and have also built a few plugins for it.
 
