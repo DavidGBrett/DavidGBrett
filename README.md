@@ -1,7 +1,13 @@
-Hi, I'm David.
+## Hi, I'm David.
 
-Recently I've been working on plugins for [Flow launcher](https://github.com/Flow-Launcher/Flow.Launcher).
-You can find them on their [website](https://www.flowlauncher.com/plugins/?search=DavidGBrett) or here on my github.
+**Maintainer of [Flow Launcher](https://github.com/Flow-Launcher/Flow.Launcher)**
+<br>
+[![](https://img.shields.io/github/downloads/Flow-Launcher/Flow.Launcher/total.svg)](https://github.com/Flow-Launcher/Flow.Launcher/releases)
+[![](https://img.shields.io/github/stars/Flow-Launcher/Flow.Launcher.svg)](https://github.com/Flow-Launcher/Flow.Launcher)
+
+I've also written a few plugins of my own - find them on the Flow Launcher [website](https://www.flowlauncher.com/plugins/?search=DavidGBrett) or here on my GitHub profile.
+
+## My Repository Stats
 
 ![Total Downloads Chart](gen/charts/total_downloads_chart.svg)
 
