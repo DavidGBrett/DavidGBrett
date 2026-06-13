@@ -3,6 +3,7 @@
 **Maintainer of [Flow Launcher](https://github.com/Flow-Launcher/Flow.Launcher)**
 <br>
 [![](https://img.shields.io/github/downloads/Flow-Launcher/Flow.Launcher/total.svg)](https://github.com/Flow-Launcher/Flow.Launcher/releases)
+[![](https://img.shields.io/github/stars/Flow-Launcher/Flow.Launcher.svg)](https://github.com/Flow-Launcher/Flow.Launcher)
 
 I work on the core project and have also built a few plugins for it.
 
